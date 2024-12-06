@@ -12,6 +12,7 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
+
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -63,11 +64,33 @@
       <input type="text" class="form-control" id="division" required>
       <div class="invalid-feedback">กรุณากรอกข้อมูลให้ครบถ้วน</div>
     </div>
+    
+<!-- <div class="mb-3">
+  <label for="division" class="form-label">แผนก</label>
+  <select class="form-select" id="division" required>
+    <option value="" disabled selected>กรุณาเลือกแผนก</option>
+    <option value="IT">IT</option>
+    <option value="HR">HR</option>
+    <option value="Finance">Finance</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Production">Production</option>
+  </select>
+  <div class="invalid-feedback">กรุณาเลือกแผนก</div>
+</div> -->
+
+    
+    
+    
     <div class="mb-3">
-      <label for="name" class="form-label">ชื่อพนักงาน</label>
+      <label for="name" class="form-label">ชื่อพนักงานเย็บ</label>
       <input type="text" class="form-control" id="name" required>
       <div class="invalid-feedback">กรุณากรอกชื่อพนักงานให้ครบถ้วน</div>
     </div>
+    <div class="mb-3">
+      <label for="checkname" class="form-label">ชื่อพนักงานตรวจ</label>
+      <input type="text" class="form-control" id="checkname" required>
+      <div class="invalid-feedback">กรุณากรอกชื่อพนักงานตรวจให้ครบถ้วน</div>
+    </div>    
     <div class="mb-3">
       <label for="phone" class="form-label">รุ่น</label>
       <input type="text" class="form-control" id="phone"  required>
@@ -77,6 +100,11 @@
       <label for="size" class="form-label">ไซต์</label>
       <input type="text" class="form-control" id="size" required>
       <div class="invalid-feedback">กรุณากรอกข้อมูลไซต์ให้ครบถ้วน</div>
+    </div>
+        <div class="mb-3">
+      <label for="number" class="form-label">เบอร์</label>
+      <input type="text" class="form-control" id="number" required>
+      <div class="invalid-feedback">กรุณากรอกข้อมูลเบอร์ให้ครบถ้วน</div>
     </div>
 <div class="mb-3">
   <label for="problem" class="form-label">ปัญหา</label>
@@ -89,7 +117,7 @@
       <input type="file" class="form-control" id="file" required>
       <div class="invalid-feedback">กรุณากรอกอัพโหลดไฟล์</div>
     </div>
-    <button type="submit" class="btn btn-lg w-100 mt-2 btn-primary">Submit</button>
+    <button type="submit" class="btn btn-lg w-100 mt-2 btn-primary">บันทึกข้อมูล</button>
   </form>
 </div>
 </main>
@@ -97,7 +125,7 @@
   
   
 <script>
-  const scriptUrl = 'XXXXXXXXXX'; 
+  const scriptUrl = 'XXXXXXXXX'; 
 
   $('#registrationForm').on('submit', function (event) {
     event.preventDefault();
@@ -110,10 +138,10 @@
     }
 
     $.LoadingOverlay("show", {
-image: "",
-fontawesome: "fa fa-spinner fa-spin",
-text: "กำลังบันทึกข้อมูล..."
-})
+      image: "",
+      fontawesome: "fa fa-spinner fa-spin",
+      text: "กำลังบันทึกข้อมูล..."
+    });
 
     // Get Form Data
     const fileInput = $('#file')[0].files[0];
@@ -125,8 +153,10 @@ text: "กำลังบันทึกข้อมูล..."
       const data = {
         division: $('#division').val(),
         name: $('#name').val(),
+        checkname: $('#checkname').val(),
         phone: $('#phone').val(),
         size: $('#size').val(),
+        number: $('#number').val(),
         problem: $('#problem').val(),
         file: base64File,
       };
@@ -161,6 +191,7 @@ text: "กำลังบันทึกข้อมูล..."
     reader.readAsDataURL(fileInput);
   });
 </script>
+
 
 </body>
 </html>

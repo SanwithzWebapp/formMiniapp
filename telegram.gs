@@ -26,10 +26,37 @@ function handleTelegram(parsed) {
   const text = parsed.message?.text;
 
   if (text === "/start") {
+    showCommandMenu(chatId); // Show the command button menu
+  } else if (text === "Form Mini App") {
     sendWelcomeMessage(chatId);
-  } else if (text === "/data") {
+  } else if (text === "Latest Data") {
     sendData(chatId);
+  } else {
+    sendTelegramMessage(chatId, "Unknown command. Please use the menu buttons.");
   }
+}
+
+function showCommandMenu(chatId) {
+  const message = {
+    chat_id: chatId,
+    text: "Please choose a command from the menu below:",
+    reply_markup: JSON.stringify({
+      keyboard: [
+        [{ text: "Form Mini App" }, { text: "Latest Data" }], // Button labels
+      ],
+      resize_keyboard: true, // Adjust the size of the keyboard
+      one_time_keyboard: false, // Keep the keyboard visible
+    }),
+  };
+
+  const telegramUrl = `https://api.telegram.org/bot${token}/sendMessage`;
+  const options = {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify(message),
+  };
+
+  UrlFetchApp.fetch(telegramUrl, options);
 }
 
 function sendWelcomeMessage(chatId) {
@@ -38,7 +65,7 @@ function sendWelcomeMessage(chatId) {
     text: "Welcome to the Form Mini App system! Please click the button below to proceed",
     reply_markup: JSON.stringify({
       inline_keyboard: [
-        [{ text: "Form Mini App", url: appUrl }],
+        [{ text: "Go to Form Mini App", url: appUrl }],
       ],
     }),
   };
@@ -61,13 +88,15 @@ function sendData(chatId) {
     if (data && data.length > 0) {
       const latestEntry = data[data.length - 1]; // Get the latest entry
       const messageText = `
-*Latest Data:*
+*ข้อมูลล่าสุด:*
 - *Timestamp:* ${latestEntry.Timestamp}
-- *Division:* ${latestEntry.แผนก}
-- *Name:* ${latestEntry.ชื่อพนักงาน}
-- *Model:* ${latestEntry.รุ่น}
-- *Size:* ${latestEntry.ไซต์}
-- *Issue:* ${latestEntry.ปัญหา}
+- *แผนก:* ${latestEntry.แผนก}
+- *ชื่อพนักงานเย็บ:* ${latestEntry.ชื่อพนักงานเย็บ}
+- *ชื่อพนักงานตรวจ:* ${latestEntry.ชื่อพนักงานตรวจ}
+- *รุ่น:* ${latestEntry.รุ่น}
+- *ไซต์:* ${latestEntry.ไซต์}
+- *เบอร์:* ${latestEntry.เบอร์}
+- *ปัญหา:* ${latestEntry.ปัญหา}
 - [File Link](${latestEntry["File URL"]})
 `;
 

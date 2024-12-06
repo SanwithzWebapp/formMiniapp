@@ -1,7 +1,6 @@
-const id_folder = '1VO-3XvxghqFKE_56CSVCZBgCx69Id8Jh';
-const token = "7766500553:AAF9QXMxX1mM4jhFkFzC10Sl3AjIhKBUvO4"; // Telegram bot token
-const appUrl = "https://incandescent-oceanic-boar.glitch.me/"; // App URL
-const jsonApiUrl = "https://opensheet.elk.sh/1p_XQc7iiKr1yQFw2Y823uu8wj8SAzruAe3Be7FE7-xk/form"; // JSON API URL
+const token = "XXXXXXXXX"; // Telegram bot token
+const appUrl = "XXXXXXXXXX"; // App URL
+const jsonApiUrl = "https://opensheet.elk.sh/XXXXXXX/XXXXX"; // JSON API URL
 
 function doPost(e) {
   try {
